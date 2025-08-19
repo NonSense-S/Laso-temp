@@ -36,6 +36,13 @@ class PatientController extends Controller
         return ApiResponse::success('ok', ['patients' => $patients]);
     }
 
+    public function getPatient(Request $request, $patient_id)
+    {
+        $patient = Patient::query()->where('id', '=', $patient_id)->with('debts')->get();
+        return ApiResponse::success('ok', ['patient' => $patient]);
+    }
+
+
     public function storePatient(StorePatientRequest $request)
     {
         $patient = $this->patientService->storePatient($request->validated(), $request->user());

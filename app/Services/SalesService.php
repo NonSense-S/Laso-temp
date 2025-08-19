@@ -16,7 +16,7 @@ use App\Models\User;
 use Illuminate\Support\Exceptions\MathException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -65,7 +65,7 @@ class SalesService
                     $product = $medPackages->get($item['product_id']);
                     $price = $product->medication->retail_price;
                     if ($item['partial_sale']) {
-                        $price = ($price / $product->medication->entities) * $item['quantity'];
+                        $price = ($price / $product->medication->entities);
                     }
                     $actual_total_retail_price += $price * $item['quantity'];
                 } else {
